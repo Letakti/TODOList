@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox prefHeight="528.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.letakti.todolist.TODOListController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Файл">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleNewTaskMenuButton" text="Новая задача" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleDeleteAllButton" text="Очистить список" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem mnemonicParsing="false" onAction="#handleCloseMenuButton" text="Выход" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Редактировать">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleDeleteDoneTasks" text="Удалить выполненые" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Помощь">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleAboutButton" text="О программе" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane id="AnchorPane" prefHeight="648.0" prefWidth="617.0" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+          <children>
+            <HBox layoutX="21.0" layoutY="14.0" prefHeight="39.0" prefWidth="279.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="14.0">
+               <children>
+                  <TextField id="tfAdd" fx:id="tfAdd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleAddButton" prefHeight="29.0" prefWidth="149.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: blue; -fx-border-radius: 100%;" text="Добавить" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <ListView id="lwMain" fx:id="lwMain" layoutX="26.0" layoutY="57.0" prefHeight="114.0" prefWidth="279.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="57.0" />
+            <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="191.0" prefHeight="39.0" prefWidth="279.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="15.0">
+               <children>
+                  <Button contentDisplay="CENTER" lineSpacing="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDeleteButton" style="-fx-background-color: red;" text="Удалить" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDoneButton" style="-fx-background-color: green;" text="✔Выполнено" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
+          </children>
+      </AnchorPane>
+   </children>
+</VBox>

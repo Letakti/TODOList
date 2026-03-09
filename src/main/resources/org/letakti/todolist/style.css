@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09.03.2026, 11:29:08
+    Author     : Letakti
+*/
+
+
+.list-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: black;
+    -fx-border-width: 2; 
+}
+
+.check-box .box {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #4CAF50;
+    -fx-border-radius: 4;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #4CAF50;
+}
