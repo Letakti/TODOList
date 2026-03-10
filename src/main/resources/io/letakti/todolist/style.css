@@ -24,3 +24,10 @@ and open the template in the editor.
 .check-box:selected .mark {
     -fx-background-color: #4CAF50;
 }
+
+.edit-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}

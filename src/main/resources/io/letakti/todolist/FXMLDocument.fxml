@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox prefHeight="528.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.letakti.todolist.TODOListController">
+<VBox prefHeight="528.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.letakti.todolist.controller.TODOListController">
    <children>
       <MenuBar>
         <menus>
@@ -52,7 +52,7 @@
                   </Button>
                </children>
             </HBox>
-            <ListView id="lwMain" fx:id="lwMain" layoutX="26.0" layoutY="57.0" prefHeight="114.0" prefWidth="279.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="57.0" />
+            <ListView id="lwMain" fx:id="lvMain" layoutX="26.0" layoutY="57.0" prefHeight="114.0" prefWidth="279.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="57.0" />
             <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="191.0" prefHeight="39.0" prefWidth="279.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="15.0">
                <children>
                   <Button contentDisplay="CENTER" lineSpacing="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDeleteButton" style="-fx-background-color: red;" text="Удалить" textFill="WHITE" HBox.hgrow="ALWAYS">

@@ -1,5 +1,6 @@
-package org.letakti.todolist;
+package io.letakti.todolist;
 
+import io.letakti.todolist.controller.TODOListController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,15 +13,15 @@ import java.io.IOException;
 public class TODOList extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/letakti/todolist/FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/letakti/todolist/FXMLDocument.fxml"));
         Parent root = loader.load();
         TODOListController controller = loader.getController();
 
         Scene scene = new Scene(root);
 
 
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/org/letakti/todolist/icons/icon.png")));
-        stage.setTitle("TOSO List");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/io/letakti/todolist/icons/icon.png")));
+        stage.setTitle("TODO List");
         stage.setOnCloseRequest((event) -> {
             controller.saveTasks();
         });

@@ -4,6 +4,8 @@ module org.letakti.todolist {
     requires java.logging;
 
 
-    opens org.letakti.todolist to javafx.fxml;
-    exports org.letakti.todolist;
+    opens io.letakti.todolist to javafx.fxml;
+    exports io.letakti.todolist;
+    exports io.letakti.todolist.controller;
+    opens io.letakti.todolist.controller to javafx.fxml;
 }

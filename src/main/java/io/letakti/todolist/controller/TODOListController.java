@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.letakti.todolist;
+package io.letakti.todolist.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,16 +17,17 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import io.letakti.todolist.ui.contorls.view.TaskCell;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import io.letakti.todolist.model.Task;
 
 /**
  *
@@ -38,7 +39,7 @@ public class TODOListController implements Initializable {
     private TextField tfAdd;
 
     @FXML
-    private ListView<CheckBox> lwMain;
+    private ListView<Task> lvMain;
 
     @FXML
     private void handleAddButton(ActionEvent event) {
@@ -48,34 +49,34 @@ public class TODOListController implements Initializable {
             return;
         }
 
-        CheckBox cbAdd = new CheckBox(input);
-        lwMain.getItems().add(cbAdd);
+        Task task = new Task(input);
+        lvMain.getItems().add(task);
         tfAdd.clear();
     }
 
     @FXML
     private void handleDeleteButton(ActionEvent event) {
-        int index = lwMain.getSelectionModel().getSelectedIndex();
-        lwMain.getItems().remove(index);
+        int index = lvMain.getSelectionModel().getSelectedIndex();
+        lvMain.getItems().remove(index);
 
     }
 
     @FXML
     private void handleDoneButton(ActionEvent event) {
-        int index = lwMain.getSelectionModel().getSelectedIndex();
+        int index = lvMain.getSelectionModel().getSelectedIndex();
 
-        lwMain.getItems().get(index).selectedProperty().set(true);
+        lvMain.getItems().get(index).setCompleted(true);
     }
 
     @FXML
     public void saveTasks() {
-        List<CheckBox> allItems = lwMain.getItems();
+        List<Task> allItems = lvMain.getItems();
 
         try {
             FileWriter fw = new FileWriter(new File(System.getProperty("user.home"), "todolist_saved.txt"));
-            for (CheckBox cb : allItems) {
-                String value = cb.getText();
-                boolean isChecked = cb.isSelected();
+            for (Task task : allItems) {
+                String value = task.getTaskDescription();
+                boolean isChecked = task.isCompleted();
                 String result = value + ";" + String.valueOf(isChecked) + "\n";
                 fw.write(result);
             }
@@ -86,15 +87,15 @@ public class TODOListController implements Initializable {
     }
 
     @FXML
-    public void loadTasks(ListView<CheckBox> listView) {
+    public void loadTasks(ListView<Task> listView) {
         try (Scanner sc = new Scanner(new File(System.getProperty("user.home"), "todolist_saved.txt"))) {
             while (sc.hasNext()) {
                 String next = sc.nextLine();
                 String[] splited = next.split(";");
 
-                CheckBox load = new CheckBox(splited[0]);
-                load.setSelected(Boolean.valueOf(splited[1]));
-                lwMain.getItems().add(load);
+                Task load = new Task(splited[0]);
+                load.setCompleted(Boolean.valueOf(splited[1]));
+                lvMain.getItems().add(load);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TODOListController.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,7 +105,7 @@ public class TODOListController implements Initializable {
     @FXML
     private void handleCloseMenuButton(ActionEvent event) {
         saveTasks();
-        Stage stage = (Stage) lwMain.getScene().getWindow();
+        Stage stage = (Stage) lvMain.getScene().getWindow();
         stage.hide();
     }
 
@@ -116,7 +117,7 @@ public class TODOListController implements Initializable {
         alert.setContentText("Вы уверены, что хотите удалить все задачи?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            lwMain.getItems().clear();
+            lvMain.getItems().clear();
         }
 
     }
@@ -128,7 +129,7 @@ public class TODOListController implements Initializable {
 
     @FXML
     private void handleDeleteDoneTasks(ActionEvent event) {
-        lwMain.getItems().removeIf(CheckBox::isSelected);
+        lvMain.getItems().removeIf(Task::isCompleted);
     }
 
     @FXML
@@ -149,24 +150,10 @@ public class TODOListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadTasks(lwMain);
+        loadTasks(lvMain);
+        lvMain.setEditable(true);
+        lvMain.setCellFactory(param -> new TaskCell());
 
-        lwMain.setCellFactory(lv -> new ListCell<CheckBox>() {
-            @Override
-            protected void updateItem(CheckBox item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(item);
-
-                    setOnMouseClicked(e -> {
-                        item.setSelected(!item.isSelected());
-                    });
-                }
-            }
-        });
     }
 
 }

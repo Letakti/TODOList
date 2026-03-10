@@ -1,4 +1,4 @@
-package org.letakti.todolist;
+package io.letakti.todolist;
 
 import javafx.application.Application;
 
