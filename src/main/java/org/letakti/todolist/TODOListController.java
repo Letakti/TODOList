@@ -7,7 +7,6 @@ package org.letakti.todolist;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -56,6 +55,9 @@ public class TODOListController implements Initializable {
     @FXML
     private void handleDeleteButton(ActionEvent event) {
         int index = lwMain.getSelectionModel().getSelectedIndex();
+        if (index < 0) {
+            return;
+        }
         lwMain.getItems().remove(index);
 
     }
@@ -63,41 +65,51 @@ public class TODOListController implements Initializable {
     @FXML
     private void handleDoneButton(ActionEvent event) {
         int index = lwMain.getSelectionModel().getSelectedIndex();
+        if (index < 0) {
+            return;
+        }
 
-        lwMain.getItems().get(index).selectedProperty().set(true);
+        lwMain.getItems().get(index).setSelected(true);
     }
 
     @FXML
     public void saveTasks() {
         List<CheckBox> allItems = lwMain.getItems();
 
-        try {
-            FileWriter fw = new FileWriter(new File(System.getProperty("user.home"), "todolist_saved.txt"));
+        File saveFile = new File(System.getProperty("user.home"), "todolist_saved.txt");
+
+        try (java.io.FileWriter fw = new java.io.FileWriter(saveFile)) {
             for (CheckBox cb : allItems) {
-                String value = cb.getText();
+                String value = cb.getText().replace("\n", " ").replace(";", ",");
                 boolean isChecked = cb.isSelected();
-                String result = value + ";" + String.valueOf(isChecked) + "\n";
-                fw.write(result);
+                fw.write(value + ";" + isChecked + "\n");
             }
-            fw.close();
         } catch (IOException ex) {
-            Logger.getLogger(TODOListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TODOListController.class.getName()).log(Level.SEVERE, "Failed to save tasks", ex);
         }
     }
 
     @FXML
-    public void loadTasks(ListView<CheckBox> listView) {
-        try (Scanner sc = new Scanner(new File(System.getProperty("user.home"), "todolist_saved.txt"))) {
-            while (sc.hasNext()) {
-                String next = sc.nextLine();
-                String[] splited = next.split(";");
+    public void loadTasks() {
+        File saveFile = new File(System.getProperty("user.home"), "todolist_saved.txt");
+        if (!saveFile.exists()) {
+            return;
+        }
 
-                CheckBox load = new CheckBox(splited[0]);
-                load.setSelected(Boolean.valueOf(splited[1]));
+        try (Scanner sc = new Scanner(saveFile)) {
+            while (sc.hasNextLine()) {
+                String next = sc.nextLine();
+                String[] split = next.split(";", 2);
+                if (split.length != 2) {
+                    continue;
+                }
+
+                CheckBox load = new CheckBox(split[0]);
+                load.setSelected(Boolean.parseBoolean(split[1]));
                 lwMain.getItems().add(load);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TODOListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TODOListController.class.getName()).log(Level.SEVERE, "Failed to load tasks", ex);
         }
     }
 
@@ -149,7 +161,7 @@ public class TODOListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadTasks(lwMain);
+        loadTasks();
 
         lwMain.setCellFactory(lv -> new ListCell<CheckBox>() {
             @Override
@@ -161,9 +173,6 @@ public class TODOListController implements Initializable {
                 } else {
                     setGraphic(item);
 
-                    setOnMouseClicked(e -> {
-                        item.setSelected(!item.isSelected());
-                    });
                 }
             }
         });
