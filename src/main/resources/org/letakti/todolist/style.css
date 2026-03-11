@@ -1,26 +1,277 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 09.03.2026, 11:29:08
-    Author     : Letakti
+Modern minimal theme system for JavaFX
 */
 
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+}
 
+/* Light theme base */
+.root.theme-light {
+    -fx-background-color: #f5f7fb;
+    -fx-text-fill: #1f2937;
+}
+
+.root.theme-light .menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.root.theme-light .menu-bar .label {
+    -fx-text-fill: #1f2937;
+}
+
+.root.theme-light .app-surface {
+    -fx-background-color: #f5f7fb;
+}
+
+.root.theme-light .text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #1f2937;
+    -fx-padding: 6 10;
+}
+
+/* Dark theme base */
+.root.theme-dark {
+    -fx-background-color: #0f172a;
+    -fx-text-fill: #e5e7eb;
+}
+
+.root.theme-dark .menu-bar {
+    -fx-background-color: #111827;
+    -fx-border-color: #243244;
+    -fx-border-width: 0 0 1 0;
+}
+
+.root.theme-dark .menu-bar .label {
+    -fx-text-fill: #e5e7eb;
+}
+
+.root.theme-dark .menu-button,
+.root.theme-dark .menu-button .label,
+.root.theme-dark .menu .label {
+    -fx-text-fill: #e5e7eb;
+}
+
+.root.theme-dark .menu-button:hover,
+.root.theme-dark .menu-button:showing {
+    -fx-background-color: #1f2937;
+}
+
+.root.theme-dark .context-menu {
+    -fx-background-color: #111827;
+    -fx-border-color: #243244;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 4;
+}
+
+.root.theme-dark .context-menu .separator .line,
+.root.theme-dark .menu-bar .separator .line,
+.root.theme-dark .menu .separator .line {
+    -fx-background-color: #243244;
+}
+
+.root.theme-dark .menu-item {
+    -fx-background-color: transparent;
+}
+
+.root.theme-dark .menu-item .label {
+    -fx-text-fill: #e5e7eb;
+}
+
+.root.theme-dark .menu-item:focused,
+.root.theme-dark .menu-item:hover,
+.root.theme-dark .menu-item:armed {
+    -fx-background-color: #1f2937;
+}
+
+.root.theme-dark .app-surface {
+    -fx-background-color: #0f172a;
+}
+
+.root.theme-dark .text-field {
+    -fx-background-color: #111827;
+    -fx-border-color: #243244;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #e5e7eb;
+    -fx-padding: 6 10;
+}
+
+/* ListView and cells (shared) */
 .list-view {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: black;
-    -fx-border-width: 2; 
+    -fx-border-width: 1;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.root.theme-light .list-view {
+    -fx-background-color: #f0f3f8;
+    -fx-border-color: #e2e8f0;
+}
+
+.root.theme-dark .list-view {
+    -fx-background-color: #1f2937;
+    -fx-border-color: #243244;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:selected,
+.list-cell:filled:selected:focused {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:selected .check-box .text,
+.list-cell:filled:selected:focused .check-box .text {
+    -fx-fill: inherit;
+}
+
+.root.theme-light .list-cell:filled:selected .task-cell,
+.root.theme-light .list-cell:filled:selected:focused .task-cell {
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+
+.root.theme-dark .list-cell:filled:selected .task-cell,
+.root.theme-dark .list-cell:filled:selected:focused .task-cell {
+    -fx-border-color: #243244;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
 }
 
 .check-box .box {
-    -fx-background-color: #2b2b2b;
-    -fx-border-color: #4CAF50;
     -fx-border-radius: 4;
 }
 
-.check-box:selected .mark {
-    -fx-background-color: #4CAF50;
+.root.theme-light .check-box .box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e2e8f0;
+}
+
+.root.theme-dark .check-box .box {
+    -fx-background-color: #111827;
+    -fx-border-color: #243244;
+}
+
+/* Accent colors (mint/blue/orange) */
+.root.accent-mint .button,
+.root.accent-mint .task-action,
+.root.accent-mint .primary-button {
+    -fx-background-color: #22c1a2;
+}
+
+.root.accent-blue .button,
+.root.accent-blue .task-action,
+.root.accent-blue .primary-button {
+    -fx-background-color: #3b82f6;
+}
+
+.root.accent-orange .button,
+.root.accent-orange .task-action,
+.root.accent-orange .primary-button {
+    -fx-background-color: #f59e0b;
+}
+
+.task-action-done {
+    -fx-background-color: #16a34a;
+}
+
+.task-action-delete {
+    -fx-background-color: #ef4444;
+}
+
+/* Text colors */
+.root.theme-light .check-box .text {
+    -fx-fill: #1f2937;
+}
+
+.root.theme-dark .check-box .text {
+    -fx-fill: #e5e7eb;
+}
+
+.task-cell {
+    -fx-alignment: center-left;
+    -fx-background-radius: 10;
+}
+
+.root.theme-light .task-cell {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 8, 0, 0, 2);
+}
+
+.root.theme-dark .task-cell {
+    -fx-background-color: #111827;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 8, 0, 0, 2);
+}
+
+.root.theme-light .task-cell.priority-high {
+    -fx-background-color: #ffffff, linear-gradient(to right, rgba(245, 158, 11, 0.18), transparent);
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 0, 0;
+}
+
+.root.theme-light .task-cell.priority-normal {
+    -fx-background-color: #ffffff, linear-gradient(to right, rgba(34, 197, 162, 0.16), transparent);
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 0, 0;
+}
+
+.root.theme-light .task-cell.priority-low {
+    -fx-background-color: #ffffff, linear-gradient(to right, rgba(148, 163, 184, 0.22), transparent);
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 0, 0;
+}
+
+.root.theme-dark .task-cell.priority-high {
+    -fx-background-color: #111827, linear-gradient(to right, rgba(245, 158, 11, 0.22), transparent);
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 0, 0;
+}
+
+.root.theme-dark .task-cell.priority-normal {
+    -fx-background-color: #111827, linear-gradient(to right, rgba(34, 197, 162, 0.20), transparent);
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 0, 0;
+}
+
+.root.theme-dark .task-cell.priority-low {
+    -fx-background-color: #111827, linear-gradient(to right, rgba(148, 163, 184, 0.24), transparent);
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 0, 0;
+}
+
+.task-actions {
+    -fx-alignment: center-right;
+    -fx-min-height: 24px;
+}
+
+.task-action {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-text-fill: white;
+    -fx-padding: 0;
+    -fx-font-size: 14px;
+    -fx-min-width: 28px;
+    -fx-pref-width: 28px;
+    -fx-max-width: 28px;
+    -fx-min-height: 24px;
+    -fx-pref-height: 24px;
+    -fx-max-height: 24px;
+}
+
+.primary-button {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
 }
