@@ -20,7 +20,7 @@ public class TODOList extends Application {
 
 
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/org/letakti/todolist/icons/icon.png")));
-        stage.setTitle("TOSO List");
+        stage.setTitle("TODO List");
         stage.setOnCloseRequest((event) -> {
             controller.saveTasks();
         });
